@@ -2,6 +2,8 @@
 #define MAIN_GUI_H
 
 #include <QMainWindow>
+#include "gui_methods.h"
+#include "gui_var.h"
 
 namespace Ui {
 class main_gui;
