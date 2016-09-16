@@ -19,7 +19,9 @@ SOURCES += main.cpp\
     gui_panelfolder.cpp \
     gui_panelcontrol.cpp \
     gui_panelimage.cpp \
-    gui_panelwheel.cpp
+    gui_panelwheel.cpp \
+    custom_button.cpp \
+    custom_label.cpp
 
 HEADERS  += main_gui.h \
     gui_methods.h \
@@ -27,7 +29,9 @@ HEADERS  += main_gui.h \
     gui_panelfolder.h \
     gui_panelcontrol.h \
     gui_panelimage.h \
-    gui_panelwheel.h
+    gui_panelwheel.h \
+    custom_button.h \
+    custom_label.h
 
 FORMS    += main_gui.ui
 

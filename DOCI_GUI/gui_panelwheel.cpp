@@ -1,6 +1,7 @@
 #include "gui_panelwheel.h"
 
-gui_PanelWheel::gui_PanelWheel(const QString& title, QWidget* parent): QGroupBox(title,parent)
+gui_PanelWheel::gui_PanelWheel(QObject* main_gui, gui_var* vars, QObject *parent):QObject(parent)
 {
-
+    this->vars = vars;
+    vars->WP_home->show();
 }

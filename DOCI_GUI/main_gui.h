@@ -2,8 +2,13 @@
 #define MAIN_GUI_H
 
 #include <QMainWindow>
-#include "gui_methods.h"
-#include "gui_var.h"
+#include "gui_methods.h" //General Method
+#include "gui_var.h" //Widget Pointers
+
+#include "gui_panelcontrol.h"
+#include "gui_panelfolder.h"
+#include "gui_panelimage.h"
+#include "gui_panelwheel.h"
 
 namespace Ui {
 class main_gui;
@@ -19,6 +24,7 @@ public:
 
 private:
     Ui::main_gui *ui;
+    gui_PanelControl *PanelControl;
 };
 
 #endif // MAIN_GUI_H

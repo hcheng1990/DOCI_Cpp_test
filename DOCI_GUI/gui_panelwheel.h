@@ -1,12 +1,15 @@
 #ifndef GUI_PANELWHEEL_H
 #define GUI_PANELWHEEL_H
 
-#include <QGroupBox>
-class gui_PanelWheel : public QGroupBox
+#include <QObject>
+#include "gui_var.h"
+class gui_PanelWheel : public QObject
 {
     Q_OBJECT
 public:
-    gui_PanelWheel(const QString& title, QWidget* parent = Q_NULLPTR);
+    gui_PanelWheel(QObject*, gui_var*, QObject *parent = Q_NULLPTR);
+private:
+    gui_var* vars;
 };
 
 #endif // GUI_PANELWHEEL_H
