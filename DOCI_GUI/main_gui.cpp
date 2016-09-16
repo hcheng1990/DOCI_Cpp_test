@@ -11,6 +11,7 @@ main_gui::main_gui(QWidget *parent) :
     gui_var* vars = new gui_var();
     centralWidget()->setLayout(vars->layoutCentral);
     PanelControl = new gui_PanelControl(this,vars);
+    PanelWheel = new gui_PanelWheel(this,vars);
 }
 
 main_gui::~main_gui()

@@ -19,6 +19,7 @@ gui_PanelControl::gui_PanelControl(QObject* main_gui, gui_var* vars, QObject *pa
     vars->CP_buttons[2]->setCheckable(true);
     vars->CP_buttons[4]->setCheckable(true);
     vars->CP_buttons[9]->show();
+    CP_initial(false);
 
     connect(vars->CP_buttons[0],SIGNAL(clicked()),this,SLOT(initialize()));
     connect(vars->CP_buttons[1],SIGNAL(clicked()),this,SLOT(cooling()));
@@ -32,26 +33,14 @@ gui_PanelControl::gui_PanelControl(QObject* main_gui, gui_var* vars, QObject *pa
     connect(vars->CP_buttons[9],SIGNAL(clicked()),main_gui,SLOT(close()));
 }
 
-//Initialize Button
+//----------------------Core Control Functions---------------------------
 void gui_PanelControl::initialize()
 {
+    qDebug() << "init";
     vars->debugLabel->setText("Initializing...");
     qApp->processEvents();
-    vars->stall();
-    for (int i = 1; i < vars->CP_buttons.count()-1; i++){
-        vars->CP_buttons[i]->show();
-    }
-    vars->CP_buttons[0]->hide();
-    vars->CP_buttons[9]->hide();
-    /*
-    //Initialize Camera
-    setButtonDisplay(vbox,false,0);
-    setButtonDisplay(vbox,false,9);
-    setButtonDisplay(vbox,true,1,8);
-    HSFW_home->show();
-    HSFW_select->show();
-    HSFW_indicator->show();
-    */
+    vars->stall(); //Initialize camera
+    CP_initial(true);
     vars->debugLabel->setText("Initialization Complete");
 }
 void gui_PanelControl::cooling()
@@ -82,11 +71,41 @@ void gui_PanelControl::shutdown()
 {
     vars->debugLabel->setText("Shutting Down...");
     qApp->processEvents();
-    vars->stall();
-    for (int i = 1; i < vars->CP_buttons.count()-1; i++){
-        vars->CP_buttons[i]->hide();
-    }
-    vars->CP_buttons[0]->show();
-    vars->CP_buttons[9]->show();
+    vars->stall(); //Shutdown Camera
+    CP_initial(false);
     vars->debugLabel->setText("Shutdown Successful");
+}
+//-------------------Sub-Functions-------------------
+void gui_PanelControl::CP_initial(bool initial)
+{
+    CP_display(!initial,0);
+    CP_display(!initial,9);
+    CP_display(initial,1,8);
+    WP_display(initial);
+}
+void gui_PanelControl::CP_display(bool display, int start)
+{
+    displayWidget(display,vars->CP_buttons[start]);
+}
+void gui_PanelControl::CP_display(bool display, int start, int end)
+{
+    for (int i = start; i <= end; i++){
+        displayWidget(display,vars->CP_buttons[i]);
+    }
+}
+void gui_PanelControl::WP_display(bool display)
+{
+    for(int i = 0; i < vars->WP_grid->count(); i++){
+        displayWidget(display,vars->WP_grid->itemAt(i)->widget());
+    }
+}
+void gui_PanelControl::displayWidget(bool display, QWidget* widget)
+{
+    widget->setEnabled(display);
+    if(display){
+        widget->show();
+
+    }else{
+        widget->hide();
+    }
 }

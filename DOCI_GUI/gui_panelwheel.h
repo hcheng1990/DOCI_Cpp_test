@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "gui_var.h"
+
 class gui_PanelWheel : public QObject
 {
     Q_OBJECT

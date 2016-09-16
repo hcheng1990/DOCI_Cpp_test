@@ -9,10 +9,9 @@ custom_button::custom_button(const QString &text, QWidget *parent): QPushButton(
 void custom_button::defaultFormat()
 {
     hide();
+    setEnabled(false);
     setMinimumHeight(50);
-    QFont font = this->font();
-    font.setPointSize(14);
-    setFont(font);
+    //setFontSize(this,14);
 }
 
 void custom_button::mousePressEvent(QMouseEvent *e)

@@ -11,3 +11,10 @@ void windowPreset(main_gui* myGUI)
     myGUI->setGeometry((deskX-winX)/2,(deskY-winY)/2,winX,winY);
     myGUI->setFixedSize(winX,winY);
 }
+/*
+void setFontSize(QWidget* widget, int fontSize)
+{
+    QFont font = widget->font();
+    font.setPointSize(fontSize);
+    widget->setFont(font);
+}*/

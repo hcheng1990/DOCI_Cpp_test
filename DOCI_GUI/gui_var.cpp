@@ -6,7 +6,7 @@ gui_var::gui_var()
     partsControl(); //Control Panel Parts
     partsWheel(); //Wheel Panel Parts
     partsFolder(); //Folder Panel Parts
-
+    partsImage(); //Image Panel Parts
 }
 void gui_var::partsPanels()
 {
@@ -62,6 +62,14 @@ void gui_var::partsFolder()
     PanelFolder->setLayout(FP_grid);
     FP_label = new custom_label("D:/Dropbox/FLIM/Harrison/Raw Data/2015_04_20/2015_04_20 03.30PM");
     FP_grid->addWidget(FP_label);
+}
+void gui_var::partsImage()
+{
+    /*
+    IP_grid = new QGridLayout();
+    IP_label = new QLabel();
+    IP_grid->addWidget(IP_label);
+    */
 }
 
 //Debug Use
