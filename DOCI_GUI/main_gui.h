@@ -26,6 +26,8 @@ private:
     Ui::main_gui *ui;
     gui_PanelControl* PanelControl;
     gui_PanelWheel* PanelWheel;
+    gui_PanelFolder* PanelFolder;
+    gui_PanelImage* PanelImage;
 };
 
 #endif // MAIN_GUI_H

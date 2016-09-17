@@ -4,6 +4,7 @@
 #include <QtWidgets>
 #include "custom_button.h"
 #include "custom_label.h"
+#include "gui_methods.h"
 
 class gui_var
 {

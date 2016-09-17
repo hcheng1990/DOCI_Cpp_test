@@ -20,6 +20,10 @@ void gui_var::partsPanels()
     layoutCentral->addWidget(PanelFolder,0,0,1,5);
     layoutCentral->addWidget(PanelImage,1,1,16,5);
     layoutCentral->addWidget(PanelWheel,0,5,1,1);
+    setFontSize(PanelControl,12);
+    setFontSize(PanelFolder,12);
+    setFontSize(PanelImage,12);
+    setFontSize(PanelWheel,12);
 }
 void gui_var::partsControl()
 {
@@ -43,14 +47,14 @@ void gui_var::partsWheel()
     WP_grid = new QGridLayout;
     PanelWheel->setLayout(WP_grid);
     WP_select = new QComboBox();
-    for(int i = 0; i < 8; i++){
+    for(int i = 1; i <= 8; i++){
         WP_select->addItem(QString::number(i));
     }
 
     WP_home = new custom_button("Home");
     WP_grid->addWidget(WP_home);
 
-    WP_label = new QLabel("0");
+    WP_label = new QLabel("1");
 
     WP_grid->addWidget(WP_home,0,0,1,1);
     WP_grid->addWidget(WP_select,0,1,0,1);
@@ -65,13 +69,11 @@ void gui_var::partsFolder()
 }
 void gui_var::partsImage()
 {
-    /*
     IP_grid = new QGridLayout();
+    PanelImage->setLayout(IP_grid);
     IP_label = new QLabel();
     IP_grid->addWidget(IP_label);
-    */
 }
-
 //Debug Use
 void gui_var::stall()
 {

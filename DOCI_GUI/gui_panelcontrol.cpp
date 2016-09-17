@@ -3,6 +3,8 @@
 gui_PanelControl::gui_PanelControl(QObject* main_gui, gui_var* vars, QObject *parent):QObject(parent)
 {
     this->vars = vars;
+    isTemp = false;
+    num = 0;
     /*
      * 0: Initialize
      * 1: Cooler
@@ -36,28 +38,98 @@ gui_PanelControl::gui_PanelControl(QObject* main_gui, gui_var* vars, QObject *pa
 //----------------------Core Control Functions---------------------------
 void gui_PanelControl::initialize()
 {
-    qDebug() << "init";
     vars->debugLabel->setText("Initializing...");
     qApp->processEvents();
     vars->stall(); //Initialize camera
+    temp = 15; //Get Camera Temp
     CP_initial(true);
     vars->debugLabel->setText("Initialization Complete");
 }
 void gui_PanelControl::cooling()
 {
-    vars->debugLabel->setText("Cooling");
+    isTemp = true;
+    vars->debugLabel->setText("Cooling...");
+    CP_display(false,2,8);
+    CP_enable(false,2,8);
+    CP_enable(false,1);
+    while(temp > -15){
+        temp = temp-2;
+        vars->debugLabel->setText(QString::number(temp));
+        vars->CP_buttons[1]->setText("Cooling...");
+        qApp->processEvents();
+        vars->stall();
+    }
+    CP_display(true,2,8);
+    CP_enable(true,2,8);
+    vars->CP_buttons[1]->setText("Camera Cooled!");
 }
-void gui_PanelControl::video(bool)
+void gui_PanelControl::video(bool checked)
 {
-    vars->debugLabel->setText("Video");
+    if(checked)
+    {
+        vars->CP_buttons[2]->setText("Stop Video");
+        CP_enable(false,1);
+        CP_enable(false,4,6);
+        CP_enable(false,8);
+    }
+    while(checked)
+    {
+        num++;
+        vars->debugLabel->setText(QString::number(num));
+        qApp->processEvents();
+        checked = vars->CP_buttons[2]->isChecked();
+    }
+    if(!checked)
+    {
+        vars->CP_buttons[2]->setText("Video Mode");
+        if(!isTemp){
+            CP_enable(true,1);
+        }
+        CP_enable(true,4,6);
+        CP_enable(true,8);
+    }
 }
 void gui_PanelControl::rgb()
 {
-    vars->debugLabel->setText("RGB");
+    vars->CP_buttons[2]->setChecked(false);
+    num = 0;
+    vars->debugLabel->setText(QString::number(num));
+    vars->CP_buttons[3]->setText("RGB Acquiring...");
+    CP_enable(false,1,8);
+    qApp->processEvents();
+    vars->stall();
+    vars->CP_buttons[3]->setText("RGB Mode");
+    if(!isTemp){
+        CP_enable(true,1);
+    }
+    CP_enable(true,2,8);
 }
 void gui_PanelControl::ltVideo(bool)
 {
-    vars->debugLabel->setText("ltVideo");
+    /*
+    if(checked)
+    {
+        DOCi_lifetimeVideo->setText("Stop LT Video");
+        setButtonEnabled(vbox,false,1,3);
+        setButtonEnabled(vbox,false,7,8);
+    }
+    while(checked)
+    {
+        num++;
+        debugLabel->setText(QString::number(num));
+        qApp->processEvents();
+        checked = DOCi_lifetimeVideo->isChecked();
+    }
+    if(!checked)
+    {
+        DOCi_lifetimeVideo->setText("Lifetime Video");
+        if(!isTemp){
+            setButtonEnabled(vbox,true,1);
+        }
+        setButtonEnabled(vbox,true,2,3);
+        setButtonEnabled(vbox,true,7,8);
+    }
+    */
 }
 void gui_PanelControl::lt1()
 {
@@ -69,11 +141,28 @@ void gui_PanelControl::lt2()
 }
 void gui_PanelControl::shutdown()
 {
+    vars->CP_buttons[2]->setChecked(false);
+    vars->CP_buttons[4]->setChecked(false);
     vars->debugLabel->setText("Shutting Down...");
+    CP_enable(false,2,8);
     qApp->processEvents();
     vars->stall(); //Shutdown Camera
+
+    while(temp < 0 || isTemp){
+        temp = temp+2;
+        vars->debugLabel->setText(QString::number(temp));
+        vars->CP_buttons[1]->setText("Camera Warming...");
+        qApp->processEvents();
+        vars->stall();
+        if(temp > 0){
+            isTemp = false;
+            CP_enable(true,1);
+        }
+    }
+    temp = 15;
     CP_initial(false);
-    vars->debugLabel->setText("Shutdown Successful");
+    vars->CP_buttons[1]->setText("Cooler");
+    vars->debugLabel->setText("Shutdown Complete");
 }
 //-------------------Sub-Functions-------------------
 void gui_PanelControl::CP_initial(bool initial)
@@ -82,6 +171,10 @@ void gui_PanelControl::CP_initial(bool initial)
     CP_display(!initial,9);
     CP_display(initial,1,8);
     WP_display(initial);
+
+    CP_enable(!initial,0);
+    CP_enable(!initial,9);
+    CP_enable(initial,1,8);
 }
 void gui_PanelControl::CP_display(bool display, int start)
 {
@@ -101,11 +194,23 @@ void gui_PanelControl::WP_display(bool display)
 }
 void gui_PanelControl::displayWidget(bool display, QWidget* widget)
 {
-    widget->setEnabled(display);
     if(display){
         widget->show();
-
     }else{
         widget->hide();
     }
+}
+void gui_PanelControl::CP_enable(bool enable, int start)
+{
+    enableWidget(enable,vars->CP_buttons[start]);
+}
+void gui_PanelControl::CP_enable(bool enable, int start, int end)
+{
+    for(int i = start; i <= end; i++){
+        enableWidget(enable,vars->CP_buttons[i]);
+    }
+}
+void gui_PanelControl::enableWidget(bool enable, QWidget* widget)
+{
+    widget->setEnabled(enable);
 }

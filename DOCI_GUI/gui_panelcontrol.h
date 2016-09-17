@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QDebug>
 #include "gui_var.h"
+
 class gui_PanelControl : public QObject
 {
     Q_OBJECT
@@ -12,11 +13,20 @@ public:
 
 private:
     gui_var* vars;
+    bool isTemp;
+    double temp;
+    int num;
+
     void WP_display(bool);
     void CP_initial(bool);
     void CP_display(bool,int);
     void CP_display(bool,int,int);
     void displayWidget(bool,QWidget*);
+
+    void CP_enable(bool,int);
+    void CP_enable(bool,int,int);
+    void enableWidget(bool,QWidget*);
+
 private slots:
     //Main Button Functions
     void initialize();

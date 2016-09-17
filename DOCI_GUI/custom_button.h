@@ -5,7 +5,7 @@
 #include <QMouseEvent>
 #include <QTimer>
 
-//#include "gui_methods.h"
+#include "gui_methods.h"
 
 class custom_button : public QPushButton
 {

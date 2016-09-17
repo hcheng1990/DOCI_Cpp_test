@@ -11,7 +11,7 @@ void custom_button::defaultFormat()
     hide();
     setEnabled(false);
     setMinimumHeight(50);
-    //setFontSize(this,14);
+    setFontSize(this,14);
 }
 
 void custom_button::mousePressEvent(QMouseEvent *e)
