@@ -73,6 +73,10 @@ void gui_var::partsImage()
     PanelImage->setLayout(IP_grid);
     IP_label = new QLabel();
     IP_grid->addWidget(IP_label);
+    IP_slider = new custom_slider();
+    //IP_grid->addWidget(IP_slider);
+    IP_slider->addTo(PanelImage);
+
 }
 //Debug Use
 void gui_var::stall()

@@ -26,6 +26,7 @@ private:
     void CP_enable(bool,int);
     void CP_enable(bool,int,int);
     void enableWidget(bool,QWidget*);
+    void lifetime(int);
 
 private slots:
     //Main Button Functions

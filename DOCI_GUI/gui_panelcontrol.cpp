@@ -104,47 +104,45 @@ void gui_PanelControl::rgb()
     }
     CP_enable(true,2,8);
 }
-void gui_PanelControl::ltVideo(bool)
+void gui_PanelControl::ltVideo(bool checked)
 {
-    /*
     if(checked)
     {
-        DOCi_lifetimeVideo->setText("Stop LT Video");
-        setButtonEnabled(vbox,false,1,3);
-        setButtonEnabled(vbox,false,7,8);
+        vars->CP_buttons[4]->setText("Stop Video");
+        CP_enable(false,1,3);
+        CP_enable(false,7,8);
     }
     while(checked)
     {
         num++;
-        debugLabel->setText(QString::number(num));
+        vars->debugLabel->setText(QString::number(num));
         qApp->processEvents();
-        checked = DOCi_lifetimeVideo->isChecked();
+        checked = vars->CP_buttons[4]->isChecked();
     }
     if(!checked)
     {
-        DOCi_lifetimeVideo->setText("Lifetime Video");
+        vars->CP_buttons[4]->setText("Video Mode");
         if(!isTemp){
-            setButtonEnabled(vbox,true,1);
+            CP_enable(true,1);
         }
-        setButtonEnabled(vbox,true,2,3);
-        setButtonEnabled(vbox,true,7,8);
+        CP_enable(true,2,3);
+        CP_enable(true,7,8);
     }
-    */
 }
 void gui_PanelControl::lt1()
 {
-    vars->debugLabel->setText("lt1");
+    lifetime(1);
 }
 void gui_PanelControl::lt2()
 {
-    vars->debugLabel->setText("lt2");
+    lifetime(2);
 }
 void gui_PanelControl::shutdown()
 {
     vars->CP_buttons[2]->setChecked(false);
     vars->CP_buttons[4]->setChecked(false);
     vars->debugLabel->setText("Shutting Down...");
-    CP_enable(false,2,8);
+    CP_enable(false,1,8);
     qApp->processEvents();
     vars->stall(); //Shutdown Camera
 
@@ -213,4 +211,27 @@ void gui_PanelControl::CP_enable(bool enable, int start, int end)
 void gui_PanelControl::enableWidget(bool enable, QWidget* widget)
 {
     widget->setEnabled(enable);
+}
+void gui_PanelControl::lifetime(int wheel)
+{
+    vars->CP_buttons[4]->setChecked(false);
+    num = 0;
+    vars->debugLabel->setText(QString::number(num));
+    if(wheel == 1){
+        vars->CP_buttons[5]->setText("Wheel 1 Acquiring...");
+    }else{
+        vars->CP_buttons[6]->setText("Wheel 2 Acquiring...");
+    }
+    CP_enable(false,1,8);
+    qApp->processEvents();
+    vars->stall();
+    if(wheel == 1){
+        vars->CP_buttons[5]->setText("Lifetime Wheel 1");
+    }else{
+        vars->CP_buttons[6]->setText("Lifetime Wheel 2");
+    }
+    if(!isTemp){
+        CP_enable(true,1);
+    }
+    CP_enable(true,2,8);
 }

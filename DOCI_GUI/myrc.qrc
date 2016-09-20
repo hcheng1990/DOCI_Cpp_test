@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>custom_slider.qml</file>
+        <file>custom_gradient.js</file>
+    </qresource>
+</RCC>

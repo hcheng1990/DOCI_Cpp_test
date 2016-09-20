@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui quick
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     gui_panelimage.cpp \
     gui_panelwheel.cpp \
     custom_button.cpp \
-    custom_label.cpp
+    custom_label.cpp \
+    custom_slider.cpp
 
 HEADERS  += main_gui.h \
     gui_methods.h \
@@ -31,7 +32,8 @@ HEADERS  += main_gui.h \
     gui_panelimage.h \
     gui_panelwheel.h \
     custom_button.h \
-    custom_label.h
+    custom_label.h \
+    custom_slider.h
 
 FORMS    += main_gui.ui
 
@@ -56,3 +58,10 @@ LIBS += -lopencv_stitching2413
 LIBS += -lopencv_superres2413
 LIBS += -lopencv_video2413
 LIBS += -lopencv_videostab2413
+
+DISTFILES += \
+    custom_slider.qml \
+    custom_gradient.js
+
+RESOURCES += \
+    myrc.qrc
