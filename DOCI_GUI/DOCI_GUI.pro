@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     custom_button.cpp \
     custom_label.cpp \
     custom_slider.cpp \
-    filterwheel.cpp
+    filterwheel.cpp \
+    andorcam.cpp
 
 HEADERS  += main_gui.h \
     gui_methods.h \
@@ -35,7 +36,8 @@ HEADERS  += main_gui.h \
     custom_button.h \
     custom_label.h \
     custom_slider.h \
-    filterwheel.h
+    filterwheel.h \
+    andorcam.h
 
 FORMS    += main_gui.ui
 
@@ -60,6 +62,13 @@ LIBS += -lopencv_stitching2413
 LIBS += -lopencv_superres2413
 LIBS += -lopencv_video2413
 LIBS += -lopencv_videostab2413
+#--------Open CV End----------
+
+#Andor Library
+win32: LIBS += -L$$PWD/./ -latmcd32m
+INCLUDEPATH += $$PWD/.
+DEPENDPATH += $$PWD/.
+#--Andor End--
 
 DISTFILES += \
     custom_slider.qml \

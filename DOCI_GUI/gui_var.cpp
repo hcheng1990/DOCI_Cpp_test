@@ -8,7 +8,10 @@ gui_var::gui_var()
     partsFolder(); //Folder Panel Parts
     partsImage(); //Image Panel Parts
 
-    filterwheel = new FilterWheel();
+    eDiag = new QMessageBox();
+    eDiag->setMinimumWidth(200);
+    eDiag->setMinimumHeight(200);
+    filterwheel = new FilterWheel(eDiag);
 }
 void gui_var::partsPanels()
 {

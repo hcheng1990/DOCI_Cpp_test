@@ -46,6 +46,9 @@ public:
     //Filter Wheel
     FilterWheel* filterwheel;
 
+    //Error Handler
+    QMessageBox* eDiag;
+
     //Debug Use
     void stall();
 private:

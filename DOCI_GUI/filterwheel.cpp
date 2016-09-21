@@ -1,10 +1,11 @@
 #include "filterwheel.h"
 
-FilterWheel::FilterWheel()
+FilterWheel::FilterWheel(QMessageBox* eDiag)
 {
     hsfw = new QAxObject("FA9E7329-1F0C-4176-996B-9E2EEABAFD85");
     filterCount = hsfw->dynamicCall("AttachedDeviceCount()").toInt();
     wheel = NULL;
+    this->eDiag = eDiag;
     if(filterCount > 0){
         filterArray = hsfw->querySubObject("FilterWheelList()");
         wheel = filterArray->querySubObject("Item(int)",0);
@@ -53,12 +54,8 @@ void FilterWheel::errorCheck()
 {
     int error = wheel->dynamicCall("ErrorState()").toInt();
     if(error != 0){
-        QMessageBox errorBox;
-        errorBox.setText(errorList[error]);
-        errorBox.setMinimumWidth(200);
-        errorBox.setMinimumHeight(200);
-        errorBox.exec();
-
+        eDiag->setText(errorList[error]);
+        eDiag->exec();
         wheel->dynamicCall("ClearErrorState()");
         error = 0;
         Home();
@@ -80,9 +77,6 @@ bool FilterWheel::isNull()
 }
 void FilterWheel::noLib()
 {
-    QMessageBox errorBox;
-    errorBox.setText("Cannot find COM LIB or wheel not attached");
-    errorBox.setMinimumWidth(200);
-    errorBox.setMinimumHeight(200);
-    errorBox.exec();
+    eDiag->setText("Cannot find COM LIB or wheel not attached");
+    eDiag->exec();
 }

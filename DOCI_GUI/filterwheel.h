@@ -9,11 +9,12 @@
 class FilterWheel
 {
 public:
-    FilterWheel();
+    FilterWheel(QMessageBox*);
     int CurrentPosition();
     void CurrentPosition(int);
     void Home();
 private:
+    QMessageBox* eDiag;
     QAxObject *hsfw;
     int filterCount;
     QAxObject *filterArray;
