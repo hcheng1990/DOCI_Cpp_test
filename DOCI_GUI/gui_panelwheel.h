@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "gui_var.h"
+#include "filterwheel.h"
 
 class gui_PanelWheel : public QObject
 {

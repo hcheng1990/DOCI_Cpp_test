@@ -5,7 +5,9 @@
 #include "custom_button.h"
 #include "custom_label.h"
 #include "custom_slider.h"
+#include "filterwheel.h"
 #include "gui_methods.h"
+
 
 class gui_var
 {
@@ -40,6 +42,9 @@ public:
     QGridLayout* IP_grid;
     QLabel* IP_label;
     custom_slider* IP_slider;
+
+    //Filter Wheel
+    FilterWheel* filterwheel;
 
     //Debug Use
     void stall();

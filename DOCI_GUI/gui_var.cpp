@@ -7,6 +7,8 @@ gui_var::gui_var()
     partsWheel(); //Wheel Panel Parts
     partsFolder(); //Folder Panel Parts
     partsImage(); //Image Panel Parts
+
+    filterwheel = new FilterWheel();
 }
 void gui_var::partsPanels()
 {

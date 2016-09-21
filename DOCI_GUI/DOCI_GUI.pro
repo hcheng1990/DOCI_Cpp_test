@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui quick
+QT       += core gui quick axcontainer
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     gui_panelwheel.cpp \
     custom_button.cpp \
     custom_label.cpp \
-    custom_slider.cpp
+    custom_slider.cpp \
+    filterwheel.cpp
 
 HEADERS  += main_gui.h \
     gui_methods.h \
@@ -33,7 +34,8 @@ HEADERS  += main_gui.h \
     gui_panelwheel.h \
     custom_button.h \
     custom_label.h \
-    custom_slider.h
+    custom_slider.h \
+    filterwheel.h
 
 FORMS    += main_gui.ui
 

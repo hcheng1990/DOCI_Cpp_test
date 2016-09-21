@@ -40,7 +40,8 @@ void gui_PanelControl::initialize()
 {
     vars->debugLabel->setText("Initializing...");
     qApp->processEvents();
-    vars->stall(); //Initialize camera
+    vars->filterwheel->Home();
+    //vars->stall(); //Initialize camera
     temp = 15; //Get Camera Temp
     CP_initial(true);
     vars->debugLabel->setText("Initialization Complete");

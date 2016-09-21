@@ -18,12 +18,12 @@ gui_PanelWheel::gui_PanelWheel(QObject* main_gui, gui_var* vars, QObject *parent
 }
 void gui_PanelWheel::wheelChange(int position)
 {
-    //MoveWheel
-    vars->WP_label->setText(QString::number(position+1));
+    vars->filterwheel->CurrentPosition(position+1); //MoveWheel
+    vars->WP_label->setText(QString::number(vars->filterwheel->CurrentPosition()));
 }
 void gui_PanelWheel::home()
 {
-    //HomeWheel
+    vars->filterwheel->Home(); //HomeWheel
     vars->WP_select->setCurrentIndex(0);
-    vars->WP_label->setText("1");
+    vars->WP_label->setText(QString::number(vars->filterwheel->CurrentPosition()));
 }
