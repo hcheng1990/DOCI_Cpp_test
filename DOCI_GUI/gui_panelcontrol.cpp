@@ -188,6 +188,7 @@ void gui_PanelControl::WP_display(bool display)
 {
     for(int i = 0; i < vars->WP_grid->count(); i++){
         displayWidget(display,vars->WP_grid->itemAt(i)->widget());
+        enableWidget(display,vars->WP_grid->itemAt(i)->widget());
     }
 }
 void gui_PanelControl::displayWidget(bool display, QWidget* widget)

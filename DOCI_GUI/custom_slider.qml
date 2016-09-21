@@ -100,7 +100,7 @@ Rectangle {
         id: minVal
         width: 50
         height: textHeight
-        text: "0"
+        text: "600"
         x: 0
         y: sliderHeight-textHeight
         horizontalAlignment: Text.AlignHCenter

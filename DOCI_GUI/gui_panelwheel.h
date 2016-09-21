@@ -11,6 +11,9 @@ public:
     gui_PanelWheel(QObject*, gui_var*, QObject *parent = Q_NULLPTR);
 private:
     gui_var* vars;
+private slots:
+    void home();
+    void wheelChange(int);
 };
 
 #endif // GUI_PANELWHEEL_H
