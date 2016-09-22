@@ -40,13 +40,26 @@ void gui_PanelImage::displayImage(double high, double low)
     QImage img(resultMap.data, resultMap.cols, resultMap.rows, QImage::Format_RGB888);
     QPixmap pixmap = QPixmap::fromImage(img);
     vars->IP_label->setPixmap(pixmap);
-}\
+}
 void gui_PanelImage::displayImage()
 {
-    displayImage(1000,600);
+    high = 1000;
+    low = 600;
+    displayImage(high,low);
 }
 
 void gui_PanelImage::changeScale(double high, double low)
 {
+    this->high = high;
+    this->low = low;
     displayImage(high,low);
 }
+/*
+void gui_PanelImage::setMat(int i_x,int i_y,WORD* lp_data)
+{
+    if(lp_data != NULL){
+        mat = cv::Mat(i_x,i_y,CV_16U,lp_data);
+        displayImage(high,low);
+    }
+}
+*/

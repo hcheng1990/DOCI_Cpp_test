@@ -41,6 +41,7 @@ void gui_PanelControl::initialize()
     vars->debugLabel->setText("Initializing...");
     qApp->processEvents();
     vars->filterwheel->Home();
+    vars->cam->initialize();
     //vars->stall(); //Initialize camera
     temp = 15; //Get Camera Temp
     CP_initial(true);
@@ -77,6 +78,11 @@ void gui_PanelControl::video(bool checked)
     {
         num++;
         vars->debugLabel->setText(QString::number(num));
+        /*
+        WORD* lp_data = vars->cam->videoMode(&(vars->i_x),&(vars->i_y));
+        vars->PanelImage->setMat(vars->i_x,vars->i_y,lp_data);
+        vars->cam->clearData();
+        */
         qApp->processEvents();
         checked = vars->CP_buttons[2]->isChecked();
     }
@@ -145,8 +151,7 @@ void gui_PanelControl::shutdown()
     vars->debugLabel->setText("Shutting Down...");
     CP_enable(false,1,8);
     qApp->processEvents();
-    vars->stall(); //Shutdown Camera
-
+    vars->cam->shutdown();
     while(temp < 0 || isTemp){
         temp = temp+2;
         vars->debugLabel->setText(QString::number(temp));

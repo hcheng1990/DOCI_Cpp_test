@@ -2,6 +2,8 @@
 #define GUI_VAR_H
 
 #include <QtWidgets>
+
+#include "andorcam.h"
 #include "custom_button.h"
 #include "custom_label.h"
 #include "custom_slider.h"
@@ -45,6 +47,9 @@ public:
 
     //Filter Wheel
     FilterWheel* filterwheel;
+
+    //Andor camera
+    AndorCam* cam;
 
     //Error Handler
     QMessageBox* eDiag;

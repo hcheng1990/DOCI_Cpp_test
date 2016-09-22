@@ -12,6 +12,8 @@ gui_var::gui_var()
     eDiag->setMinimumWidth(200);
     eDiag->setMinimumHeight(200);
     filterwheel = new FilterWheel(eDiag);
+
+    cam = new AndorCam();
 }
 void gui_var::partsPanels()
 {

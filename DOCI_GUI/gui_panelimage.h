@@ -17,10 +17,13 @@ class gui_PanelImage : public QObject
 public:
     gui_PanelImage(gui_var*, QObject *parent = Q_NULLPTR);
     cv::Mat mat;
+    //void setMat(int,int,WORD*);
 private:
     gui_var* vars;
     void displayImage();
     void displayImage(double,double);
+    int high;
+    int low;
 private slots:
     void changeScale(double,double);
 };
